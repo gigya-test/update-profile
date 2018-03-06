@@ -1,18 +1,40 @@
 <html>
 <head>
-    <title>Gigya Login</title>
+    <title>Gigya Update Profile</title>
 </head>
 <body>
+     <h2 id='domains'></h2>
+    <p>https://gigya-test.github.io/update-profile/?dataCenter=il1&apiKey=3_M6f...sewE</p>
 <script>
 function onJSLoad() {
     gigya.accounts.showScreenSet({
     screenSet: 'Default-ProfileUpdate'
     })
+    var domains = window.gigya.partnerSettings.baseDomains;
+    var domainsEl = document.getElementById("domains");
+    domainsEl.innerHTML = domains;
 }
+function loadGigyaScript(url, callback) {
+    // Adding the script tag to the head as suggested before
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback;
+    script.onload = callback;
+    // Fire the loading
+    head.appendChild(script);
+}
+var url = new URL(window.location.href);
+var dataCenter = url.searchParams.get("dataCenter") || 'il1';
+var apiKey = url.searchParams.get("apiKey") || '3_M6fRJCEMS54keyScmDMyehcG2ox82uCikKW7L56XOcHvQBjoKpjLY_zRNg4nGJ6I';// __base_site_for_e2e
+var apiUrl = `https://cdns.` + dataCenter + `.gigya.com/JS/gigya.js?apikey=` + apiKey
+loadGigyaScript(apiUrl, onJSLoad)
+// us1 / ida-test-soa  
+// var apikey=3_tuy1llbPnwe1LmPPl3-UjbVZGwfhKht1mhH-jN0UrKZQLNJsVceDufxv4EUXkoXA    
 </script>
-<!-- us1 / max-raas -->
-<script src='https://cdns.us1.gigya.com/JS/gigya.js?apikey=3_l_Q4lVdZoqNZ70WJ2RsqIrGFMHGaO4SzCIEIMvokr1-Z8eGfPbYoobtsSs5h1LEe'
-type='text/javascript' onLoad='onJSLoad();'>
-</script>
+
 </body>
 </html>
