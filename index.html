@@ -12,8 +12,11 @@ function onJSLoad() {
     screenSet: 'Default-ProfileUpdate'
     })
     var domains = window.gigya.partnerSettings.baseDomains;
-    var domainsEl = document.getElementById("domains");
-    domainsEl.innerHTML = domains;
+    var domainEl = document.getElementById("domain");
+    domainEl.innerHTML = 'site: ' + domains + ' (' + apiKey +')';
+    
+    var dcEl = document.getElementById("dataCenter");
+    dcEl.innerHTML = 'dataCenter: ' + dataCenter;
 }
 function loadGigyaScript(url, callback) {
     // Adding the script tag to the head as suggested before
